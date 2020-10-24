@@ -4,6 +4,7 @@ import android.os.Bundle;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.util.Log;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 
 import id.putraprima.courtcounter.R;
 import id.putraprima.courtcounter.databinding.FragmentCounterBinding;
+import id.putraprima.courtcounter.models.Score;
 import id.putraprima.courtcounter.viewmodels.CounterViewModels;
 
 public class CounterFragment extends Fragment {
@@ -31,7 +33,13 @@ public class CounterFragment extends Fragment {
         mViewModels = new ViewModelProvider(this).get(CounterViewModels.class);
         binding.setLifecycleOwner(this);
         binding.setCounterViewModel(mViewModels);
+        mViewModels.scoreMutableLiveData.observe(getViewLifecycleOwner(), new Observer<Score>() {
+            @Override
+            public void onChanged(Score score) {
+                binding.txtScoreHome.setText(Integer.toString(score.getHomeScore()));
+                binding.txtScoreAway.setText(Integer.toString(score.getAwayScore()));
+            }
+        });
         return binding.getRoot();
-
     }
 }
