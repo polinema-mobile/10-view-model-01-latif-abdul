@@ -31,15 +31,8 @@ public class CounterFragment extends Fragment {
 
         FragmentCounterBinding binding = DataBindingUtil.inflate(inflater,R.layout.fragment_counter, container, false);
         mViewModels = new ViewModelProvider(this).get(CounterViewModels.class);
-        binding.setLifecycleOwner(this);
         binding.setCounterViewModel(mViewModels);
-        mViewModels.scoreMutableLiveData.observe(getViewLifecycleOwner(), new Observer<Score>() {
-            @Override
-            public void onChanged(Score score) {
-                binding.txtScoreHome.setText(Integer.toString(score.getHomeScore()));
-                binding.txtScoreAway.setText(Integer.toString(score.getAwayScore()));
-            }
-        });
+        binding.setLifecycleOwner(this);
         return binding.getRoot();
     }
 }
