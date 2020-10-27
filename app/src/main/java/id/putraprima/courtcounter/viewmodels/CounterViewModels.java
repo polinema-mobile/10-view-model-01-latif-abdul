@@ -29,6 +29,7 @@ public class CounterViewModels extends ViewModel {
         Log.d("Point Away : ", String.valueOf(score.getAwayScore()));
     }
 
+
     public void reset(){
         score.setAwayScore(0);
         score.setHomeScore(0);
@@ -36,4 +37,5 @@ public class CounterViewModels extends ViewModel {
         Log.d("Point Away : ", String.valueOf(score.getAwayScore()));
         Log.d("Point Home : ", String.valueOf(score.getHomeScore()));
     }
+
 }
